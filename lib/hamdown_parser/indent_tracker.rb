@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'error'
 
-module HamlParser
+module HamdownParser
   class IndentTracker
     class IndentMismatch < Error
       attr_reader :current_level, :indent_levels

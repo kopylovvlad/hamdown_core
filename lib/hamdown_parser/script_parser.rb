@@ -3,7 +3,7 @@ require_relative 'ast'
 require_relative 'error'
 require_relative 'ruby_multiline'
 
-module HamlParser
+module HamdownParser
   class ScriptParser
     def initialize(line_parser)
       @line_parser = line_parser

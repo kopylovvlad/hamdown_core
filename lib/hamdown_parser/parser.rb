@@ -8,8 +8,9 @@ require_relative 'line_parser'
 require_relative 'ruby_multiline'
 require_relative 'script_parser'
 require_relative 'utils'
+require 'pry'
 
-module HamlParser
+module HamdownParser
   class Parser
     def initialize(options = {})
       @filename = options[:filename]
@@ -65,6 +66,19 @@ module HamlParser
     FILTER_PREFIX = ':'
     ESCAPE_PREFIX = '\\'
 
+    MARKDOWN = {
+      'headers' => /^\#{1,6} .+$/,
+      'list_item' => /((^[\d{1,3}|\*|\+]\.? .*\n?)+)/, # not nesting
+      'quotes' => /((^>{1,4} .+\n?)+)/,
+      'image' => /^!\[[^\[\]]*?\]\([^\s]*?\)/,
+      'image_title' => /^!\[[^\[\]]*?\]\([^\s]*\s\".*\"\)/,
+      'link' => /^[^!]\[[^\[\]]*?\]\([^\s]*?\)/,
+      'link_with_title' => /^[^!]\[[^\[\]]*?\]\([^\s]*\s\".*\"\)/
+      # codeblock # nesting within plain text is illegal
+    }
+    # bold, italic, b_italic, monospace
+    # paragraphs !
+
     def parse_line(line)
       text, indent = @indent_tracker.process(line, @line_parser.lineno)
 
@@ -78,6 +92,27 @@ module HamlParser
         return
       end
 
+      case text
+      when MARKDOWN['headers']
+        parse_md_header(text)
+      when MARKDOWN['list_item']
+        parse_md_list(text)
+      when MARKDOWN['quotes']
+        parse_md_quote(text)
+      when MARKDOWN['image']
+        parse_md_image(text)
+      when MARKDOWN['image_title']
+        parse_md_image(text, true)
+      when MARKDOWN['link']
+        parse_md_link(text)
+      when MARKDOWN['link_title']
+        parse_md_link(text, true)
+      else
+        std_parse_line(text)
+      end
+    end
+
+    def std_parse_line(text)
       case text[0]
       when ESCAPE_PREFIX
         parse_plain(text[1..-1])
@@ -97,6 +132,7 @@ module HamlParser
         if text.start_with?('#{')
           parse_script(text)
         else
+          # binding.pry
           parse_line("#{indent}%div#{text}")
         end
       when FILTER_PREFIX
@@ -135,6 +171,34 @@ module HamlParser
 
     def parse_plain(text)
       @ast << create_node(Ast::Text) { |t| t.text = text }
+    end
+
+    def parse_md_header(text)
+      @ast << create_node(Ast::MdHeader) { |t| t.text = text }
+    end
+
+    def parse_md_list(text)
+      @ast << create_node(Ast::MdList) { |t| t.text = text }
+    end
+
+    def parse_md_quote(text)
+      @ast << create_node(Ast::MdQuote) { |t| t.text = text }
+    end
+
+    def parse_md_image(text, title = false)
+      if title == true
+        @ast << create_node(Ast::MdImageTitle) { |t| t.text = text }
+      else
+        @ast << create_node(Ast::MdImage) { |t| t.text = text }
+      end
+    end
+
+    def parse_md_link(text, title = false)
+      if title == true
+        @ast << create_node(Ast::MdLinkTitle) { |t| t.text = text }
+      else
+        @ast << create_node(Ast::MdLink) { |t| t.text = text }
+      end
     end
 
     def parse_element(text)

@@ -15,7 +15,7 @@ HAML
     expect(ast.children.size).to eq(3)
     aggregate_failures do
       expect(ast.children[0].tag_name).to eq('p')
-      expect(ast.children[1]).to be_a(HamlParser::Ast::HamlComment)
+      expect(ast.children[1]).to be_a(HamdownParser::Ast::HamlComment)
       expect(ast.children[2].tag_name).to eq('p')
     end
     comment = ast.children[1]
@@ -37,7 +37,7 @@ HAML
   -#
   %p world
 HAML
-    expect(ast.children[1]).to be_a(HamlParser::Ast::HamlComment)
+    expect(ast.children[1]).to be_a(HamdownParser::Ast::HamlComment)
     expect(ast.children[1].children).to be_empty
   end
 end

@@ -24,5 +24,5 @@ Style/Documentation:
 
 Style/PredicateName:
   Exclude:
-    - 'lib/haml_parser/line_parser.rb'
-    - 'lib/haml_parser/ruby_multiline.rb'
+    - 'lib/hamdown_parser/line_parser.rb'
+    - 'lib/hamdown_parser/ruby_multiline.rb'

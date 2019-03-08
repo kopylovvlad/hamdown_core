@@ -1,17 +1,17 @@
-# HamlParser
-[![Gem Version](https://badge.fury.io/rb/haml_parser.svg)](http://badge.fury.io/rb/haml_parser)
-[![Build Status](https://travis-ci.org/eagletmt/haml_parser.svg?branch=master)](https://travis-ci.org/eagletmt/haml_parser)
-[![Coverage Status](https://coveralls.io/repos/eagletmt/haml_parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/eagletmt/haml_parser?branch=master)
-[![Code Climate](https://codeclimate.com/github/eagletmt/haml_parser/badges/gpa.svg)](https://codeclimate.com/github/eagletmt/haml_parser)
+# HamdownParser
+[![Gem Version](https://badge.fury.io/rb/hamdown_parser.svg)](http://badge.fury.io/rb/hamdown_parser)
+[![Build Status](https://travis-ci.org/eagletmt/hamdown_parser.svg?branch=master)](https://travis-ci.org/eagletmt/hamdown_parser)
+[![Coverage Status](https://coveralls.io/repos/eagletmt/hamdown_parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/eagletmt/hamdown_parser?branch=master)
+[![Code Climate](https://codeclimate.com/github/eagletmt/hamdown_parser/badges/gpa.svg)](https://codeclimate.com/github/eagletmt/hamdown_parser)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/haml_parser`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hamdown_parser`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'haml_parser'
+gem 'hamdown_parser'
 ```
 
 And then execute:
@@ -20,12 +20,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install haml_parser
+    $ gem install hamdown_parser
 
 ## Usage
 
 ```ruby
-parser = HamlParser::Parser.new(filename: 'input.haml')
+parser = HamdownParser::Parser.new(filename: 'input.haml')
 ast = parser.call(File.read('input.haml'))
 ```
 
@@ -34,10 +34,10 @@ Simple CLI interface is also available.
 ```
 % cat input.haml
 %p hello world
-% haml_parser input.haml
-#<struct HamlParser::Ast::Root
+% hamdown_parser input.haml
+#<struct HamdownParser::Ast::Root
  children=
-  [#<struct HamlParser::Ast::Element
+  [#<struct HamdownParser::Ast::Element
     children=[],
     tag_name="p",
     static_class="",
@@ -45,7 +45,7 @@ Simple CLI interface is also available.
     old_attributes=nil,
     new_attributes=nil,
     oneline_child=
-     #<struct HamlParser::Ast::Text
+     #<struct HamdownParser::Ast::Text
       text="hello world",
       escape_html=true,
       filename="input.haml",
@@ -66,7 +66,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/eagletmt/haml_parser.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eagletmt/hamdown_parser.
 
 
 ## License

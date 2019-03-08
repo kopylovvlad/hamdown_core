@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+
+require_relative '../lib/hamdown_parser/parser'
+require_relative '../lib/hamdown_compiler'
+require 'pp'
+
+parser = HamdownParser::Parser.new(filename: 'input.haml')
+ast = parser.call(File.read('input.haml'))
+result = HamdownCompiler.call(ast)
+puts result

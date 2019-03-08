@@ -2,7 +2,7 @@
 require 'optparse'
 require_relative 'version'
 
-module HamlParser
+module HamdownParser
   class CLI
     def self.start(argv)
       new.start(argv)
@@ -22,7 +22,7 @@ module HamlParser
     end
 
     def parse_file(file)
-      HamlParser::Parser.new(filename: file).call(File.read(file))
+      HamdownParser::Parser.new(filename: file).call(File.read(file))
     end
 
     private

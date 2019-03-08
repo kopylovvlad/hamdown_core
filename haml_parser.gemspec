@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'haml_parser/version'
+require 'hamdown_parser/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'haml_parser'
-  spec.version       = HamlParser::VERSION
+  spec.name          = 'hamdown_parser'
+  spec.version       = HamdownParser::VERSION
   spec.authors       = ['Kohei Suzuki']
   spec.email         = ['eagletmt@gmail.com']
 
   spec.summary       = 'Parser of Haml template language'
   spec.description   = 'Parser of Haml template language'
-  spec.homepage      = 'https://github.com/eagletmt/haml_parser'
+  spec.homepage      = 'https://github.com/eagletmt/hamdown_parser'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|benchmark)/}) }

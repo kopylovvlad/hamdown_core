@@ -113,22 +113,22 @@ HAML
   end
 
   it 'raises error when attributes list is unterminated' do
-    expect { parse('%span(foo=1 bar=2') }.to raise_error(HamlParser::Error)
+    expect { parse('%span(foo=1 bar=2') }.to raise_error(HamdownParser::Error)
   end
 
   it 'raises error when key is not alnum' do
-    expect { parse('%span(foo=1 3.14=3) hello') }.to raise_error(HamlParser::Error)
+    expect { parse('%span(foo=1 3.14=3) hello') }.to raise_error(HamdownParser::Error)
   end
 
   it 'raises error when value is missing' do
-    expect { parse('%span(foo=1 bar=) hello') }.to raise_error(HamlParser::Error)
+    expect { parse('%span(foo=1 bar=) hello') }.to raise_error(HamdownParser::Error)
   end
 
   it 'raises error when quote is unterminated' do
-    expect { parse('%span(foo=1 bar="baz) hello') }.to raise_error(HamlParser::Error)
+    expect { parse('%span(foo=1 bar="baz) hello') }.to raise_error(HamdownParser::Error)
   end
 
   it 'raises error when string interpolation is unterminated' do
-    expect { parse('%span(foo=1 bar="ba#{1") hello') }.to raise_error(HamlParser::Error)
+    expect { parse('%span(foo=1 bar="ba#{1") hello') }.to raise_error(HamdownParser::Error)
   end
 end

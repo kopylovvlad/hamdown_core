@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe HamlParser::IndentTracker do
+RSpec.describe HamdownParser::IndentTracker do
   it 'raises error if indent is wrong' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::IndentTracker::IndentMismatch) { |e|
+    expect { parse(<<HAML) }.to raise_error(HamdownParser::IndentTracker::IndentMismatch) { |e|
 %div
     %div
         %div
@@ -18,7 +18,7 @@ HAML
   end
 
   it 'raises error if the current indent is deeper than the previous one' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::IndentTracker::InconsistentIndent) { |e|
+    expect { parse(<<HAML) }.to raise_error(HamdownParser::IndentTracker::InconsistentIndent) { |e|
 %div
   %div
       %div
@@ -32,7 +32,7 @@ HAML
   end
 
   it 'raises error if the current indent is shallower than the previous one' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::IndentTracker::InconsistentIndent) { |e|
+    expect { parse(<<HAML) }.to raise_error(HamdownParser::IndentTracker::InconsistentIndent) { |e|
 %div
     %div
       %div
@@ -46,14 +46,14 @@ HAML
   end
 
   it 'raises error if indented with hard tabs' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::IndentTracker::HardTabNotAllowed)
+    expect { parse(<<HAML) }.to raise_error(HamdownParser::IndentTracker::HardTabNotAllowed)
 %p
 	%a
 HAML
   end
 
   it 'raise error when the first line has indentation' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::Error)
+    expect { parse(<<HAML) }.to raise_error(HamdownParser::Error)
   foo
 HAML
   end

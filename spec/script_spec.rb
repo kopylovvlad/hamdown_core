@@ -83,8 +83,8 @@ HAML
   end
 
   it 'raises error when there is no Ruby code' do
-    expect { parse('%span=') }.to raise_error(HamlParser::Error)
-    expect { parse("%span\n  =") }.to raise_error(HamlParser::Error)
+    expect { parse('%span=') }.to raise_error(HamdownParser::Error)
+    expect { parse("%span\n  =") }.to raise_error(HamdownParser::Error)
   end
 
   describe '~' do
@@ -140,8 +140,8 @@ HAML
     end
 
     it 'raises error when there is no Ruby code' do
-      expect { parse('%span&=') }.to raise_error(HamlParser::Error)
-      expect { parse("%span\n  &=") }.to raise_error(HamlParser::Error)
+      expect { parse('%span&=') }.to raise_error(HamdownParser::Error)
+      expect { parse("%span\n  &=") }.to raise_error(HamdownParser::Error)
     end
   end
 
@@ -169,8 +169,8 @@ HAML
     end
 
     it 'raises error when there is no Ruby code' do
-      expect { parse('%span!=') }.to raise_error(HamlParser::Error)
-      expect { parse("%span\n  !=") }.to raise_error(HamlParser::Error)
+      expect { parse('%span!=') }.to raise_error(HamdownParser::Error)
+      expect { parse("%span\n  !=") }.to raise_error(HamdownParser::Error)
     end
   end
 end
