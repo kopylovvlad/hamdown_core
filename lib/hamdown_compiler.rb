@@ -12,6 +12,28 @@ module HamdownCompiler
       strings = []
       ast_nodes.each do |node|
         case node
+        when HamdownParser::Ast::Filter
+          str = (' ' * space_deep)
+          str += ":#{node.name}"
+          strings << str
+          node.texts.each do |row|
+            row = (' ' * (space_deep + 2)) + row
+            strings << row
+          end
+        when HamdownParser::Ast::SilentScript
+          str = (' ' * space_deep)
+          str += "- #{node.script}"
+          strings << str
+        when HamdownParser::Ast::Script
+          str = (' ' * space_deep)
+          if node.escape_html == true
+            str += "= #{node.script}"
+          else
+            str += "!= #{node.script}"
+          end
+          strings << str
+        when HamdownParser::Ast::Text
+          strings << (' ' * space_deep + "#{node.text}")
         when HamdownParser::Ast::HtmlComment
           # ready
           strings << (' ' * space_deep + "/ #{node.comment}")
@@ -47,7 +69,21 @@ module HamdownCompiler
             str += "{#{node.old_attributes}}"
           end
 
+          if !node.oneline_child.nil?
+            substr = render_strings([node.oneline_child]).first
+            unless substr.start_with?('=')
+              substr = " #{substr}"
+            end
+            str += substr
+          end
+
           strings << str
+        end
+
+        if node.respond_to?(:children) && node.children.size > 0
+          render_strings(node.children, space_deep + 2).each do |str|
+            strings << str
+          end
         end
       end
       strings

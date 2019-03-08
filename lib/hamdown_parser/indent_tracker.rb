@@ -37,7 +37,7 @@ module HamdownParser
     end
 
     def process(line, lineno)
-      if line.start_with?("\t")
+      if line.include?("\t")
         raise HardTabNotAllowed.new(lineno)
       end
       indent, text = split(line)

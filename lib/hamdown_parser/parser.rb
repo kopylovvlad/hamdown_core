@@ -108,11 +108,11 @@ module HamdownParser
       when MARKDOWN['link_title']
         parse_md_link(text, true)
       else
-        std_parse_line(text)
+        std_parse_line(text, indent)
       end
     end
 
-    def std_parse_line(text)
+    def std_parse_line(text, indent)
       case text[0]
       when ESCAPE_PREFIX
         parse_plain(text[1..-1])
@@ -132,7 +132,6 @@ module HamdownParser
         if text.start_with?('#{')
           parse_script(text)
         else
-          # binding.pry
           parse_line("#{indent}%div#{text}")
         end
       when FILTER_PREFIX
