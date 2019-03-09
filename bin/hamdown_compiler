@@ -7,7 +7,7 @@ require_relative '../lib/hamdown_core/transformer'
 require_relative '../lib/hamdown_core/compiler'
 require 'pp'
 
-parser = HamdownCore::Parser.new(filename: 'input.haml')
-ast = parser.call(File.read('input.haml'))
+parser = HamdownCore::Parser.new(filename: ARGV[0])
+ast = parser.call(File.read(ARGV[0]))
 transformed_ast = HamdownCore::Transformer.call(ast)
 puts HamdownCore::Compiler.call(transformed_ast)
