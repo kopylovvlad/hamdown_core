@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module HamdownParser
   module Ast
     module HasChildren
@@ -143,6 +144,10 @@ module HamdownParser
 
       def to_h
         super.merge(type: 'text')
+      end
+
+      def markdownable?
+        true
       end
     end
 

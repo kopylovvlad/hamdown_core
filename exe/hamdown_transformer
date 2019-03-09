@@ -2,10 +2,9 @@
 
 require_relative '../lib/hamdown_parser/parser'
 require_relative '../lib/hamdown_transformer'
-require_relative '../lib/hamdown_compiler'
 require 'pp'
 
 parser = HamdownParser::Parser.new(filename: 'input.haml')
 ast = parser.call(File.read('input.haml'))
 transformed_ast = HamdownTransformer.call(ast)
-puts HamdownCompiler.call(transformed_ast)
+pp transformed_ast
