@@ -1,10 +1,9 @@
-# coding: utf-8
 # frozen_string_literal: true
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hamdown_core/version'
+require './lib/hamdown_core/version'
 
 Gem::Specification.new do |spec|
+  spec.specification_version = 2 if spec.respond_to? :specification_version=
+  spec.required_rubygems_version = Gem::Requirement.new(">= 0") if spec.respond_to? :required_rubygems_version=
   spec.name          = 'hamdown_core'
   spec.version       = HamdownCore::VERSION
   spec.authors       = ['Kohei Suzuki', 'Kopylov Vladislav']

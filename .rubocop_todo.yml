@@ -11,7 +11,7 @@
 # Include: **/*.gemspec
 Gemspec/RequiredRubyVersion:
   Exclude:
-    - 'haml_parser.gemspec'
+    - 'hamdown_core.gemspec'
 
 # Offense count: 5
 # Cop supports --auto-correct.
@@ -174,13 +174,13 @@ Style/Documentation:
 # Cop supports --auto-correct.
 Style/Encoding:
   Exclude:
-    - 'haml_parser.gemspec'
+    - 'hamdown_core.gemspec'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/ExpandPathArguments:
   Exclude:
-    - 'haml_parser.gemspec'
+    - 'hamdown_core.gemspec'
 
 # Offense count: 6
 # Cop supports --auto-correct.
