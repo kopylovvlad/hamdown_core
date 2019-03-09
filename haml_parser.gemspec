@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'haml_parser/version'
+require 'hamdown_core/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'haml_parser'
-  spec.version       = HamlParser::VERSION
-  spec.authors       = ['Kohei Suzuki']
-  spec.email         = ['eagletmt@gmail.com']
+  spec.name          = 'hamdown_core'
+  spec.version       = HamdownCore::VERSION
+  spec.authors       = ['Kohei Suzuki', 'Kopylov Vladislav']
+  spec.email         = ['kopylov.vlad@gmail.com']
 
-  spec.summary       = 'Parser of Haml template language'
-  spec.description   = 'Parser of Haml template language'
-  spec.homepage      = 'https://github.com/eagletmt/haml_parser'
+  spec.summary       = 'Parser of Hamlit template language'
+  spec.description   = 'Parser of Hamlit template language'
+  spec.homepage      = 'https://github.com/kopylovvlad/hamdown_core'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|benchmark)/}) }
@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '>= 3.3.0'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'solargraph'
 end

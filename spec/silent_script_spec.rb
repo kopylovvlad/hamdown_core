@@ -8,7 +8,7 @@ RSpec.describe 'Silent script parser' do
   %span= i
 HAML
     aggregate_failures do
-      expect(ast).to be_a(HamlParser::Ast::SilentScript)
+      expect(ast).to be_a(HamdownCore::Ast::SilentScript)
       expect(ast.script).to eq('2.times do |i|')
       expect(ast.keyword).to eq(nil)
       expect(ast.children.size).to eq(1)

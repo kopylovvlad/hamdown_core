@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module HamlParser
+module HamdownCore
   module RubyMultiline
     def self.read(line_parser, current_text)
       buf = []

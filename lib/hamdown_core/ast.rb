@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-module HamlParser
+
+module HamdownCore
   module Ast
     module HasChildren
       def initialize(*)
@@ -144,7 +145,19 @@ module HamlParser
       def to_h
         super.merge(type: 'text')
       end
+
+      def markdownable?
+        true
+      end
     end
+
+    class MdHeader < Text; end
+    class MdList < Text; end
+    class MdQuote < Text; end
+    class MdImageTitle < Text; end
+    class MdImage < Text; end
+    class MdLinkTitle < Text; end
+    class MdLink < Text; end
 
     Filter = Struct.new(:name, :texts, :filename, :lineno) do
       def initialize(*)

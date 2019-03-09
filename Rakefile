@@ -13,7 +13,7 @@ desc 'Run all benchmarks'
 task :benchmark => ['benchmark:sample', 'benchmark:haml']
 
 namespace :benchmark do
-  desc "Run benchmark with haml_parser's sample"
+  desc "Run benchmark with hamdown_core's sample"
   task :sample do
     sample_haml_path = File.join(__dir__, 'spec', 'fixtures', 'sample.haml')
     sh 'ruby', 'benchmark/parse.rb', sample_haml_path

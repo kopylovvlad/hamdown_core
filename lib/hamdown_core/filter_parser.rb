@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'ast'
 
-module HamlParser
+module HamdownCore
   class FilterParser
     def initialize(indent_tracker)
       @ast = nil

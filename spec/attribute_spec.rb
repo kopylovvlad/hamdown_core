@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe 'Attribute parser' do
   it 'parses attributes' do
     ast = expect_single_ast('%span{class: "x"} hello')
-    expect(ast).to be_a(HamlParser::Ast::Element)
+    expect(ast).to be_a(HamdownCore::Ast::Element)
     aggregate_failures do
       expect(ast.tag_name).to eq('span')
       expect(ast.old_attributes).to eq('class: "x"')
@@ -66,7 +66,7 @@ RSpec.describe 'Attribute parser' do
     end
 
     it 'raises error for unmatched brackets' do
-      expect { parse('%span[foo hello') }.to raise_error(HamlParser::Error)
+      expect { parse('%span[foo hello') }.to raise_error(HamdownCore::Error)
     end
   end
 
@@ -95,8 +95,8 @@ RSpec.describe 'Attribute parser' do
 
     context 'with invalid classes' do
       it 'raises error' do
-        expect { parse('%span. hello') }.to raise_error(HamlParser::Error)
-        expect { parse('%span.{foo: "bar"} hello') }.to raise_error(HamlParser::Error)
+        expect { parse('%span. hello') }.to raise_error(HamdownCore::Error)
+        expect { parse('%span.{foo: "bar"} hello') }.to raise_error(HamdownCore::Error)
       end
     end
   end
@@ -136,7 +136,7 @@ RSpec.describe 'Attribute parser' do
 
     it 'ignores invalid static id' do
       ast = expect_single_ast('#{1 + 2}')
-      expect(ast).to_not be_a(HamlParser::Ast::Element)
+      expect(ast).to_not be_a(HamdownCore::Ast::Element)
       aggregate_failures do
         expect(ast.text).to eq('#{1 + 2}')
       end
@@ -144,15 +144,15 @@ RSpec.describe 'Attribute parser' do
 
     context 'with invalid ids' do
       it 'raises error' do
-        expect { parse('%span# hello') }.to raise_error(HamlParser::Error)
-        expect { parse('%span#{foo: "bar"} hello') }.to raise_error(HamlParser::Error)
+        expect { parse('%span# hello') }.to raise_error(HamdownCore::Error)
+        expect { parse('%span#{foo: "bar"} hello') }.to raise_error(HamdownCore::Error)
       end
     end
   end
 
   context 'with unmatched brace' do
     it 'raises error' do
-      expect { parse('%span{foo hello') }.to raise_error(HamlParser::Error)
+      expect { parse('%span{foo hello') }.to raise_error(HamdownCore::Error)
     end
 
     it 'tries to parse next lines' do
@@ -167,7 +167,7 @@ HAML
     end
 
     it "doesn't try to parse next lines without trailing comma" do
-      expect { parse(<<HAML) }.to raise_error(HamlParser::Error)
+      expect { parse(<<HAML) }.to raise_error(HamdownCore::Error)
 %span{foo: 1
 , bar: 2} hello
 HAML

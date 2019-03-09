@@ -13,7 +13,7 @@ RSpec.describe 'doctype parser' do
   end
 
   it 'raises error when doctype has children' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::Error, /nesting within a header command/)
+    expect { parse(<<HAML) }.to raise_error(HamdownCore::Error, /nesting within a header command/)
 !!!
   hello
 HAML

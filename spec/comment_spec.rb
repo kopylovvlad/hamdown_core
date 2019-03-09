@@ -61,11 +61,11 @@ HAML
   end
 
   it 'raises error if conditional comment bracket is unbalanced' do
-    expect { parse('/[[if IE]') }.to raise_error(HamlParser::Error)
+    expect { parse('/[[if IE]') }.to raise_error(HamdownCore::Error)
   end
 
   it 'raises error if both comment text and children are given' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::Error)
+    expect { parse(<<HAML) }.to raise_error(HamdownCore::Error)
 / hehehe
   %span hello
 HAML

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'error'
 
-module HamlParser
+module HamdownCore
   class IndentTracker
     class IndentMismatch < Error
       attr_reader :current_level, :indent_levels
@@ -37,7 +37,7 @@ module HamlParser
     end
 
     def process(line, lineno)
-      if line.start_with?("\t")
+      if line.include?("\t")
         raise HardTabNotAllowed.new(lineno)
       end
       indent, text = split(line)

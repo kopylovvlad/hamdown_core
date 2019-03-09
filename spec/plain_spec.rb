@@ -8,7 +8,7 @@ RSpec.describe 'Plain parser' do
   end
 
   it 'raises error when text has children' do
-    expect { parse(<<HAML) }.to raise_error(HamlParser::Error, /nesting within plain text/)
+    expect { parse(<<HAML) }.to raise_error(HamdownCore::Error, /nesting within plain text/)
 hello
   world
 HAML
