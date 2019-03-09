@@ -6,7 +6,7 @@ require_relative 'ruby_multiline'
 require_relative 'script_parser'
 require_relative 'utils'
 
-module HamdownParser
+module HamdownCore
   class ElementParser
     def initialize(line_parser)
       @line_parser = line_parser

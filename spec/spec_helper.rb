@@ -10,11 +10,11 @@ SimpleCov.start do
   add_filter File.dirname(__FILE__)
 end
 
-require 'hamdown_parser/parser'
+require 'hamdown_core/parser'
 
 module SpecHelper
   def parse(str)
-    HamdownParser::Parser.new(filename: 'spec.haml').call(str)
+    HamdownCore::Parser.new(filename: 'spec.haml').call(str)
   end
 
   def expect_single_ast(str)

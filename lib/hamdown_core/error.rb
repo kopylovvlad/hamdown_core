@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module HamdownParser
+module HamdownCore
   class Error < StandardError
     attr_accessor :lineno
 

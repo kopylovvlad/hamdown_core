@@ -14,8 +14,8 @@ HAML
     foo, empty1, empty2, quux = ast.children
     aggregate_failures do
       expect(foo.script).to eq('"foo " + "bar " + "baz"               ')
-      expect(empty1).to be_a(HamdownParser::Ast::Empty)
-      expect(empty2).to be_a(HamdownParser::Ast::Empty)
+      expect(empty1).to be_a(HamdownCore::Ast::Empty)
+      expect(empty2).to be_a(HamdownCore::Ast::Empty)
       expect(quux.script).to eq('"quux"')
       expect(quux.lineno).to eq(5)
     end
@@ -48,8 +48,8 @@ HAML
     text, empty1, empty2 = ast.children
     aggregate_failures do
       expect(text.text).to eq('foo  bar baz ')
-      expect(empty1).to be_a(HamdownParser::Ast::Empty)
-      expect(empty2).to be_a(HamdownParser::Ast::Empty)
+      expect(empty1).to be_a(HamdownCore::Ast::Empty)
+      expect(empty2).to be_a(HamdownCore::Ast::Empty)
     end
   end
 

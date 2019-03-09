@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module HamdownParser
+module HamdownCore
   module Ast
     module HasChildren
       def initialize(*)

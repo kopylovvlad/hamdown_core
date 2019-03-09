@@ -31,6 +31,6 @@ HAML
   end
 
   it 'raises error if invalid filter name is given' do
-    expect { parse(':filter with spaces') }.to raise_error(HamdownParser::Error)
+    expect { parse(':filter with spaces') }.to raise_error(HamdownCore::Error)
   end
 end

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module HamdownParser
+module HamdownCore
   class LineParser
     attr_reader :filename, :lineno
 

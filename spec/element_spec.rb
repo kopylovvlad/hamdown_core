@@ -100,7 +100,7 @@ HAML
 HAML
     expect(ast.children.size).to eq(2)
     aggregate_failures do
-      expect(ast.children[0]).to be_a(HamdownParser::Ast::Empty)
+      expect(ast.children[0]).to be_a(HamdownCore::Ast::Empty)
       expect(ast.children[0].lineno).to eq(2)
     end
     b = ast.children[1]
@@ -109,18 +109,18 @@ HAML
       expect(b.children.size).to eq(3)
     end
     aggregate_failures do
-      expect(b.children[0]).to be_a(HamdownParser::Ast::Empty)
+      expect(b.children[0]).to be_a(HamdownCore::Ast::Empty)
       expect(b.children[0].lineno).to eq(4)
       expect(b.children[1].text).to eq('hello')
       expect(b.children[1].lineno).to eq(5)
-      expect(b.children[2]).to be_a(HamdownParser::Ast::Empty)
+      expect(b.children[2]).to be_a(HamdownCore::Ast::Empty)
       expect(b.children[2].lineno).to eq(6)
     end
   end
 
   context 'with invalid tag name' do
     it 'raises error' do
-      expect { parse('%.foo') }.to raise_error(HamdownParser::Error)
+      expect { parse('%.foo') }.to raise_error(HamdownCore::Error)
     end
   end
 
@@ -153,11 +153,11 @@ HAML
   end
 
   it 'raises error if self-closing tag have text' do
-    expect { parse('%p/ hello') }.to raise_error(HamdownParser::Error)
+    expect { parse('%p/ hello') }.to raise_error(HamdownCore::Error)
   end
 
   it 'raises error if self-closing tag have children' do
-    expect { parse(<<HAML) }.to raise_error(HamdownParser::Error)
+    expect { parse(<<HAML) }.to raise_error(HamdownCore::Error)
 %p/
   hello
 HAML

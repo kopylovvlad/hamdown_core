@@ -1,6 +1,6 @@
 %div.container
   = "first"
-  # Helo
+  # HamdownCore or hamdown_core
 
   %div.container2
     = "first.2"

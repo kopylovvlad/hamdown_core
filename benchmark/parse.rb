@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 require 'benchmark/ips'
 require 'haml'
-require 'hamdown_parser/parser'
+require_relative '../lib/hamdown_core/parser'
 
 template = File.read(ARGV[0])
 options = Haml::Options.new
@@ -12,8 +12,8 @@ Benchmark.ips do |x|
     Haml::Parser.new(template, options).parse
   end
 
-  x.report('HamdownParser::Parser') do
-    HamdownParser::Parser.new.call(template)
+  x.report('HamdownCore::Parser') do
+    HamdownCore::Parser.new.call(template)
   end
 
   x.compare!

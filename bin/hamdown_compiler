@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../lib/hamdown_core/parser'
+require_relative '../lib/hamdown_core/transformer'
+require_relative '../lib/hamdown_core/compiler'
+require 'pp'
+
+parser = HamdownCore::Parser.new(filename: 'input.haml')
+ast = parser.call(File.read('input.haml'))
+transformed_ast = HamdownCore::Transformer.call(ast)
+puts HamdownCore::Compiler.call(transformed_ast)

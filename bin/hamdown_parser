@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../lib/hamdown_core/parser'
+require 'pp'
+
+parser = HamdownCore::Parser.new(filename: 'input.haml')
+ast = parser.call(File.read('input.haml'))
+pp ast

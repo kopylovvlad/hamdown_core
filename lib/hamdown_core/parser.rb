@@ -10,7 +10,7 @@ require_relative 'script_parser'
 require_relative 'utils'
 require 'pry'
 
-module HamdownParser
+module HamdownCore
   class Parser
     def initialize(options = {})
       @filename = options[:filename]
