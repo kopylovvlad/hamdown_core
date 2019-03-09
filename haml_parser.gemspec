@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Parser of Hamlit template language'
   spec.description   = 'Parser of Hamlit template language'
-  spec.homepage      = 'https://github.com/'
+  spec.homepage      = 'https://github.com/kopylovvlad/hamdown_core'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|benchmark)/}) }
