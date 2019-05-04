@@ -8,7 +8,6 @@ require_relative 'line_parser'
 require_relative 'ruby_multiline'
 require_relative 'script_parser'
 require_relative 'utils'
-require 'pry'
 
 module HamdownCore
   class Parser
