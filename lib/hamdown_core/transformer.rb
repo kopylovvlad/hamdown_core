@@ -29,8 +29,18 @@ module HamdownCore
             node = transform(node)
           end
 
+          if node.respond_to?(:html_list?) and node.html_list?
+            filter = if node.ol_list?
+              create_filter(node.children.map(&:to_ol_list_item!))
+            else
+              create_filter(node.children.map(&:to_ul_list_item!))
+            end
+            node = filter
+          end
+
           new_root_node << node
         end
+
         if collected_nodes.size > 0
           filter = create_filter(collected_nodes)
           collected_nodes = []

@@ -75,8 +75,13 @@ module HamdownCore
       'link_with_title' => /^[^!]\[[^\[\]]*?\]\([^\s]*\s\".*\"\)/
       # codeblock # nesting within plain text is illegal
     }
-    # bold, italic, b_italic, monospace
-    # paragraphs !
+
+    HTML = {
+      'list_ol_root' => /^ *<ol>/,
+      'list_ul_root' => /^ *<ul>/,
+      'list_end' => /^ *<\/(ul|ol)>/,
+      'list_item' => /^ *<li>.*<\/li>$/
+    }
 
     def parse_line(line)
       text, indent = @indent_tracker.process(line, @line_parser.lineno)
@@ -106,6 +111,14 @@ module HamdownCore
         parse_md_link(text)
       when MARKDOWN['link_title']
         parse_md_link(text, true)
+      when HTML['list_ol_root']
+        parse_html_list(text, :ol)
+      when HTML['list_ul_root']
+        parse_html_list(text, :ul)
+      when HTML['list_end']
+        parse_html_list_end(text)
+      when HTML['list_item']
+        parse_html_list_item(text)
       else
         std_parse_line(text, indent)
       end
@@ -177,6 +190,24 @@ module HamdownCore
 
     def parse_md_list(text)
       @ast << create_node(Ast::MdList) { |t| t.text = text }
+    end
+
+    def parse_html_list(text, type)
+      if type == :ol
+        @ast << create_node(Ast::HtmlOlList) { |t| t.text = text }
+      elsif type == :ul
+        @ast << create_node(Ast::HtmlUlList) { |t| t.text = text }
+      else
+        raise 'undefined html list type'
+      end
+    end
+
+    def parse_html_list_item(text)
+      @ast << create_node(Ast::HtmlListItem) { |t| t.text = text }
+    end
+
+    def parse_html_list_end(text)
+      @ast << create_node(Ast::HtmlListEnd) { |t| t.text = text }
     end
 
     def parse_md_quote(text)

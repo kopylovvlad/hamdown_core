@@ -134,7 +134,7 @@ module HamdownCore
       end
     end
 
-    Text = Struct.new(:text, :escape_html, :filename, :lineno) do
+    BaseText = Struct.new(:text, :escape_html, :filename, :lineno) do
       def initialize(*)
         super
         if escape_html.nil?
@@ -151,6 +151,9 @@ module HamdownCore
       end
     end
 
+    class Text < BaseText; end
+
+    # markdown
     class MdHeader < Text; end
     class MdList < Text; end
     class MdQuote < Text; end
@@ -158,6 +161,72 @@ module HamdownCore
     class MdImage < Text; end
     class MdLinkTitle < Text; end
     class MdLink < Text; end
+
+    # html
+    HtmlList = Struct.new(:children, :text, :filename, :lineno) do
+      include HasChildren
+
+      def to_h
+        super.merge(type: 'html_list')
+      end
+    end
+    class HtmlOlList < HtmlList
+      def ol_list?
+        true
+      end
+      def html_list?
+        true
+      end
+    end
+    class HtmlUlList < HtmlList
+      def ol_list?
+        false
+      end
+      def html_list?
+        true
+      end
+    end
+
+    class HtmlListItem < BaseText
+      def html_list_item?
+        true
+      end
+      def markdownable?
+        false
+      end
+      def to_ol_list_item!
+        node = HtmlOlListItem.new
+        node.filename = filename
+        node.lineno = lineno
+        node.text = text
+        node
+      end
+      def to_ul_list_item!
+        node = HtmlUlListItem.new
+        node.filename = filename
+        node.lineno = lineno
+        node.text = text
+        node
+      end
+    end
+    class HtmlOlListItem < HtmlListItem
+      def text
+        str = super.gsub('<li>', '').gsub('</li>', '')
+        "1. #{str}"
+      end
+    end
+    class HtmlUlListItem < HtmlListItem
+      def text
+        str = super.gsub('<li>', '').gsub('</li>', '')
+        "* #{str}"
+      end
+    end
+
+    class HtmlListEnd < BaseText
+      def markdownable?
+        false
+      end
+    end
 
     Filter = Struct.new(:name, :texts, :filename, :lineno) do
       def initialize(*)
